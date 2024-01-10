@@ -1,0 +1,237 @@
+import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import AppNavbar from '../Navbar/navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../flightshow.css';
+
+///add
+import { useForm } from "react-hook-form";
+import { Link, useParams, useHistory } from "react-router-dom";
+import Axios from "axios";
+
+
+const Flightshow = ({ searchCriteria }) => {
+  const [flights, setFlights] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (searchCriteria) {
+      fetchAvailableFlights();
+    }
+  }, [searchCriteria]);
+
+  const fetchAvailableFlights = async () => {
+    try {
+      const { origin, destination } = searchCriteria;
+
+      const response = await fetch(`http://localhost:3001/flightshow?Departurecity=${origin}&Arrivalcity=${destination}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+
+      const data = await response.json();
+      console.log(data);
+      setFlights(data);
+    } catch (error) {
+      console.error('Error fetching available flights:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <AppNavbar />
+      <div>
+        <center>
+          <div>
+            {loading ? (
+              <p>Loading...</p>
+            ) : flights.length === 0 ? (
+              <p>No available flights</p>
+            ) : (
+              <table className='tablefs'>
+                <tbody>
+                  <tr>
+                    <td>ID</td>
+                    <td>AIRLINE</td>
+                    <td>Depart Time</td>
+                    <td>Arrival Time</td>
+                    <td>FROM</td>
+                    <td>TO</td>
+                    <td>First Class</td>
+                    <td>Business Class</td>
+                    <td>Premium Economy Class</td>
+                    <td>Economy Class</td>
+                  </tr>
+                  {flights.map((flight, index) => (
+                    <tr key={flight.id || index}>
+                      <td>{flight.id}</td>
+                      <td>{flight.airline}</td>
+                      <td>{flight.departTime}</td>
+                      <td>{flight.arrivalTime}</td>
+                      <td>{flight.from}</td>
+                      <td>{flight.to}</td>
+                      <td>{flight.firstClass}</td>
+                      <td>{flight.businessClass}</td>
+                      <td>{flight.premiumEconomyClass}</td>
+                      <td>{flight.economyClass}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </center>
+      </div>
+    </div>
+  );
+};
+
+export default Flightshow;
+
+
+///////////////////////////
+                    /////////////             Home.js
+                    
+                    import React, { useState } from 'react';
+                    import { useNavigate } from 'react-router-dom';
+                    import 'bootstrap/dist/css/bootstrap.min.css';
+                    import Navbar from '../Navbar/navbar';
+                    import '../home.css';
+                    
+                    const Home = () => {
+                      const navigate = useNavigate();
+                    
+                      const [searchCriteria, setSearchCriteria] = useState({
+                        origin: '',
+                        destination: '',
+                      });
+                    
+                      const handleSubmit = (event) => {
+                        event.preventDefault();
+                        // Redirect to the specified page using the navigate function
+                        navigate('/flightshow', { state: { searchCriteria } });
+                      };
+                    
+                      const hClick = () => {
+                        navigate('/roundtrip');
+                      };
+                    
+                      const cities = [
+                        'Ujjain',
+                        'Surat',
+                        'Delhi',
+                        'Mumbai',
+                        'Kolkata',
+                        'Hyderabad',
+                        'Ahemdabad',
+                        'Banglore',
+                        'Chennai',
+                        'Kota',
+                        'Indore',
+                      ];
+                    
+                      return (
+                        <div>
+                          <Navbar />
+                          <div>
+                            <form onSubmit={handleSubmit}>
+                              <div id="mydata">
+                                <center className='midcontnr'>
+                                  <table cellPadding="12">
+                                    <tbody>
+                                      <tr>
+                                        <td>
+                                          <button type="button" className="A" onClick={hClick}>
+                                            Round-way Trip
+                                          </button>
+                                          <button type="button" className="A">
+                                            One-way Trip
+                                          </button>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>Origin</td>
+                                        <td>
+                                          <select
+                                            name="u1"
+                                            className="Aa"
+                                            value={searchCriteria.origin}
+                                            onChange={(e) =>
+                                              setSearchCriteria({
+                                                ...searchCriteria,
+                                                origin: e.target.value,
+                                              })
+                                            }
+                                          >
+                                            {cities.map((city, index) => (
+                                              <option key={index}>{city}</option>
+                                            ))}
+                                          </select>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>Destination</td>
+                                        <td>
+                                          <select
+                                            name="u2"
+                                            className="Aa"
+                                            value={searchCriteria.destination}
+                                            onChange={(e) =>
+                                              setSearchCriteria({
+                                                ...searchCriteria,
+                                                destination: e.target.value,
+                                              })
+                                            }
+                                          >
+                                            {cities.map((city, index) => (
+                                              <option key={index}>{city}</option>
+                                            ))}
+                                          </select>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>Departure</td>
+                                        <td>
+                                          <input
+                                            type="date"
+                                            placeholder="dd/mm/yyyy"
+                                            className="Aa"
+                                            name="u4"
+                                            value={searchCriteria.departureDate}
+                                            onChange={(e) =>
+                                              setSearchCriteria({
+                                                ...searchCriteria,
+                                                departureDate: e.target.value,
+                                              })
+                                            }
+                                          />
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td colSpan="2">
+                                          <button type="submit" className="btn btn-success">
+                                            SEARCH
+                                          </button>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </center>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      );
+                    };
+                    
+                    export default Home;
+                    

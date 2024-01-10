@@ -1,0 +1,46 @@
+
+.no-underline
+{
+    text-decoration: none;
+}
+#mymenu 
+{
+background-color:rgba(0,0,0,0.3);
+color:white;
+text-align:right;
+}
+#mymenu ul li
+{
+display:inline-block;
+padding:20px;
+}
+#mymenu ul li:hover
+{
+	background:cyan
+}
+table
+{
+	margin-top:15px;
+	background-color:rgba(0,0,0,0.3);
+	color:white;
+	box-shadow:15px 15px 15px black;
+}
+.B
+{
+background:linear-gradient(blue,magenta);
+color:white;
+padding:5px;
+border-radius:0px 10px 0px 10px;
+text-align: center;	
+}
+.A
+{
+	border-radius:20px
+}
+.B
+{
+	background:linear-gardient(red,green);
+	color:white;
+	padding:5px;
+	border-radius:10px 0px 10px 0px;
+}

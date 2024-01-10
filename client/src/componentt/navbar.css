@@ -1,0 +1,27 @@
+.hv:hover{
+    color: rgb(0, 0, 0);
+    /* background: rgba(50, 93, 212, 0.63); */
+    border-radius: 15px;
+    border: rgba(255, 255, 0, 0.843) 2px solid ;
+    transition:  0.6s;
+}
+/* navbar.css */
+
+/* Set the navbar to be fixed at the top */
+.navbar11 {
+    position:fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Set a high z-index to ensure it appears above other elements */
+    /* color: rgb(0, 0, 0); */
+    /* background: rgba(50, 93, 212, 0.63); */
+    /* border-radius: 10px;
+    border: rgba(255, 255, 0, 0.843) 2px solid ;
+    transition:  0.6s; */
+}
+
+
+
+  
+ 
+  

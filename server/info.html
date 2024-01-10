@@ -1,0 +1,53 @@
+<!-- 
+/////////////  when connect both table flightshow and booking
+
+                mysql> select * from bookings;
+                +------+------+------+--------+-----------------------+----------------+--------------------------+------------+----------------+
+                | PNR  | name | age  | gender | address               | state          | email                    | contact    | FClass         |
+                +------+------+------+--------+-----------------------+----------------+--------------------------+------------+----------------+
+                | 1000 | abc  |   19 | Male   | badayalamatji piploda | Madhya Pradesh | sohanbodana123@gmail.com | 9302124544 | First Class    |
+                | 1001 | sbcd |   20 | Male   | badayalamatji piploda | Madhya Pradesh | abcd@gmail.com           | 9302124544 | Business Class |
+                +------+------+------+--------+-----------------------+----------------+--------------------------+------------+----------------+
+                2 rows in set (0.00 sec)
+                
+                mysql> select * from flightshow;
+                +------+-------------+------------+-------------+-----------+-------------+------------+---------------+---------------------+--------------+
+                | FID  | AIRLINE     | DepartTime | ArrivalTime | Origin    | Destination | FirstClass | BusinessClass | PremiumEconomyClass | EconomyClass |
+                +------+-------------+------------+-------------+-----------+-------------+------------+---------------+---------------------+--------------+
+                | 1001 | Indigo      | 07:05:00   | 09:02:00    | Kolkata   | Delhi       |       8938 |          7517 |                6598 |         5876 |
+                | 1005 | Vistara     | 10:03:00   | 12:00:00    | Mumbai    | Ahemdabad   |       7870 |          6596 |                3681 |         2566 |
+                | 1007 | Air India   | 11:16:00   | 03:05:00    | Indore    | Surat       |      11473 |         10565 |                5256 |         6876 |
+                | 1008 | Spice jet   | 03:33:00   | 09:55:00    | Hyderabad | Banglore    |       9150 |          8696 |                3681 |         2934 |
+                | 1009 | Air Bharat  | 06:04:00   | 06:39:00    | Ujjain    | Indore      |       5473 |          4265 |                3256 |         2876 |
+                | 1010 | GoAir       | 08:45:00   | 11:20:00    | Chennai   | Mumbai      |       7845 |          6320 |                4895 |         3987 |
+                | 1012 | Air Asia    | 12:30:00   | 02:45:00    | Jaipur    | Lucknow     |       6780 |          5215 |                4523 |         3569 |
+                | 1015 | Jet Airways | 05:15:00   | 07:30:00    | Bhopal    | Patna       |       9350 |          8205 |                6878 |         5890 |
+                +------+-------------+------------+-------------+-----------+-------------+------------+---------------+---------------------+--------------+
+                how to connect both when i found flightdetail
+                ChatGPT
+                To connect the bookings table and the flightshow table based on the flight details, you'll need a common column that exists in both tables. It seems like the FID in the flightshow table corresponds to the flights, so you might want to use this as a reference to link the two tables.
+                
+                Assuming you have an additional column in the bookings table named flight_id (or any appropriate name) that corresponds to the FID in the flightshow table, you can use a SQL JOIN operation to retrieve data from both tables based on this common column.
+                
+                Here is an example query:
+                
+                sql
+                Copy code
+                SELECT bookings.PNR, bookings.name, bookings.age, bookings.gender, 
+                       bookings.address, bookings.state, bookings.email, bookings.contact, 
+                       bookings.FClass, flightshow.AIRLINE, flightshow.DepartTime, flightshow.ArrivalTime, 
+                       flightshow.Origin, flightshow.Destination, flightshow.FirstClass, 
+                       flightshow.BusinessClass, flightshow.PremiumEconomyClass, flightshow.EconomyClass
+                FROM bookings
+                JOIN flightshow ON bookings.flight_id = flightshow.FID;
+                In this query:
+                
+                bookings is the table name.
+                flightshow is the table from which you want to retrieve data.
+                bookings.flight_id is the column in the bookings table that corresponds to FID in the flightshow table.
+                The JOIN clause is used to combine rows from both tables based on the specified condition.
+                Please replace flight_id with the actual column name you have in the bookings table that corresponds to the FID in the flightshow table. Also, adjust the column names in the SELECT clause based on your actual column names.
+                
+                This query will return a result set that combines information from both tables for the matching rows.
+
+/////////////  when connect both table flightshow and booking -->

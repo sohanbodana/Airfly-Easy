@@ -1,0 +1,113 @@
+/* Default styles */
+
+  
+  .styled-table {
+    width: 60%;
+    border-collapse: collapse;
+    margin-top: 2px;
+    
+  }
+  
+  .styled-table th, .styled-table td {
+    border: 1px solid #ddd;
+    padding: 1px;
+    text-align: center;
+    font: 1em sans-serif;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .styled-table th, .styled-table td {
+      font-size: 12px;
+    }
+  
+    /* Adjust other styles as needed for smaller screens */
+  }
+  
+  /* Additional styles for smaller screens if needed */
+  @media (max-width: 576px) {
+    .styled-table th, .styled-table td {
+      font-size: 12px;
+    }
+  
+    /* Adjust other styles as needed for even smaller screens */
+  }
+  
+  /* Button styles */
+  .btn {
+    padding: 2px;
+    font-size: 14px;
+  }
+  
+  .btn-book {
+    background-color: #3498db;
+    color: #fff;
+  }
+  
+  .btn-login {
+    background-color: #2ecc71;
+    color: #fff;
+  }
+  
+.styled-table{
+    border-collapse: collapse;
+    margin:auto;
+    font-size:0.9 em;
+    font-family:sans-serif;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+
+.styled-table thead tr{
+    background-color: #009879;
+    color:#ffffff;
+    text-align:left;
+}
+
+
+.btn{
+    border:none;
+    color:white;
+    padding:5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    font-size: 14px;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+}
+
+.btn-edit{
+    background-color: #008cba;
+}
+
+.btn-delete{
+    background-color: #f44336;
+}
+
+.btn-view{
+    background-color: #e7e7e7;
+    color:black;
+}
+
+.btn-client{
+    background-color: #e82764;
+    /* margin-bottom: 50px; */
+    /* margin-top: 50px; */
+    /* margin-left:18.5%; */
+    /* width:100px; */
+}
+
+.btn-login{
+    background-color: #008cba;
+}
+
+.btn-book{
+    background-color: #009879;
+}
+
+.bg-tasweer{
+    background-repeat: no-repeat;
+    height:100vh;
+}
